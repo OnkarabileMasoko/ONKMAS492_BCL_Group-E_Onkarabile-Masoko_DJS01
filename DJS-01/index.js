@@ -32,6 +32,23 @@ if (velocity.unit !== 'km/h' || acceleration.unit !== 'm/s^2' || duration.unit !
   throw new Error('Invalid unit of measurement for one or more input parameters');
 }
 
+// Convert units to a common unit (m/s, m, kg)
+const velocityInMetersPerSecond = velocity.value / 3.6;
+const initialDistanceInMeters = initialDistance.value * 1000;
+
+// Calculate new distance
+const newDistanceInMeters = initialDistanceInMeters + (velocityInMetersPerSecond * duration.value);
+const newDistanceInKilometers = newDistanceInMeters / 1000;
+
+// Calculate remaining fuel
+const remainingFuelInKilograms = fuelAmount.value - (fuelBurnRate.value * duration.value);
+
+// Calculate new velocity based on acceleration
+const newVelocityInMetersPerSecond = calcNewVelocity(acceleration.value, velocityInMetersPerSecond, duration.value);
+const newVelocityInKilometersPerHour = newVelocityInMetersPerSecond * 3.6;
+
+
+
 console.log(`Corrected New Velocity: ${vel2} km/h`);
 console.log(`Corrected New Distance: ${d2} km`);
 console.log(`Corrected Remaining Fuel: ${rf} kg`);
