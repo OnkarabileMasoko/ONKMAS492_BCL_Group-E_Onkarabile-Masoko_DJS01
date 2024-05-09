@@ -7,6 +7,7 @@
 
 // Given Parameters
 
+
 const velocity = { value: 10000, unit: 'km/h' }; // velocity (km/h)
 const acceleration = { value: 3, unit: 'm/s^2' }; // acceleration (m/s^2)
 const duration = { value: 3600, unit: 's' }; // seconds (1 hour)
