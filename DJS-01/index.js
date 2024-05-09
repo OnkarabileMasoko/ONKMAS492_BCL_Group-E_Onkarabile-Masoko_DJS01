@@ -7,7 +7,6 @@
 
 // Given Parameters
 
-
 const velocity = { value: 10000, unit: 'km/h' }; // velocity (km/h)
 const acceleration = { value: 3, unit: 'm/s^2' }; // acceleration (m/s^2)
 const duration = { value: 3600, unit: 's' }; // seconds (1 hour)
@@ -15,13 +14,22 @@ const initialDistance = { value: 0, unit: 'km' }; // distance (km)
 const fuelAmount = { value: 5000, unit: 'kg' }; // remaining fuel (kg)
 const fuelBurnRate = { value: 0.5, unit: 'kg/s' }; // fuel burn rate (kg/s)
 
-const d2 = d + (vel*time) //calcultes new distance
-const rf = fbr*time //calculates remaining fuel
-const vel2 = calcNewVel(acc, vel, time) //calculates new velocity based on acceleration
+ // Function to calculate new velocity based on acceleration
+const calcNewVelocity = (acceleration, velocity, duration) => {
+  // Validate input parameters
+  if (typeof acceleration !== 'number' || typeof velocity !== 'number' || typeof duration !== 'number') {
+    throw new Error('Invalid input parameters for calcNewVelocity function');
+  }
 
-// Pick up an error with how the function below is called and make it robust to such errors
-calcNewVel = (vel, acc, time) => { 
-  return vel + (acc*time)
+  // Calculate new velocity based on acceleration
+  const newVelocity = velocity + (acceleration * duration);
+
+  return newVelocity;
+}
+
+// Validate input parameters
+if (velocity.unit !== 'km/h' || acceleration.unit !== 'm/s^2' || duration.unit !== 's' || initialDistance.unit !== 'km' || fuelAmount.unit !== 'kg' || fuelBurnRate.unit !== 'kg/s') {
+  throw new Error('Invalid unit of measurement for one or more input parameters');
 }
 
 console.log(`Corrected New Velocity: ${vel2} km/h`);
